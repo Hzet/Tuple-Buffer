@@ -41,6 +41,6 @@ namespace haz
 			static constexpr std::size_t StrideSize_ = GetElementOffset<sizeof...(Args)>();
 		};
 
-#include "universal-buffer-base.inl"
+#include "tuple-buffer-base.inl"
 	}
 }

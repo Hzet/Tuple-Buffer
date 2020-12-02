@@ -2,7 +2,7 @@
 
 #include <vector>
 
-#include "universal-buffer-base.hpp"
+#include "tuple-buffer-base.hpp"
 
 namespace haz
 {
@@ -46,5 +46,5 @@ namespace haz
 		std::vector<std::byte> data_;
 	};
 
-#include "universal-buffer.inl"
+#include "tuple-buffer.inl"
 }	
