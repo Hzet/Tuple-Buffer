@@ -28,10 +28,8 @@ namespace haz
 			template <std::size_t I> static void ConstructElement(std::byte * const data);
 			template <std::size_t I = 0u> static void DestructAll(std::byte * const data);
 			template <std::size_t I = 0u> static void ConstructAll(std::byte * const data);
-			template <std::size_t I, class U> static void ConstructElementValue(std::byte * const data, const U &value);
 			template <std::size_t I, class U> static void ConstructElementValue(std::byte * const data, U &&value);
 			static void ConstructValueAll(std::byte * const data, Args&&... elems);
-			static void ConstructValueAll(std::byte * const data, const Args&... elems);
 			template <typename Tuple, std::size_t... Sequence> static void ConstructValueAll_impl(std::byte * const data, Tuple &&t, std::index_sequence<Sequence...>);
 
 			template <std::size_t I> static auto * const GetPointer(std::byte * const data);

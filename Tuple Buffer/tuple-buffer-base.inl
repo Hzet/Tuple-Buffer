@@ -101,28 +101,11 @@ void CTupleBufferBase<Args...>::ConstructElementValue(std::byte * const data, U 
 
 	using type = std::remove_reference_t<U>;
 
-	if constexpr (std::is_move_constructible_v<U>)
+	if constexpr (std::is_move_constructible_v<U> || std::is_copy_constructible_v<U>)
 		new(reinterpret_cast<type*>(data + GetElementOffset<I>())) type(value);
+	else
+		static_assert(false, "Type U is not constructible from a value");
 }
-
-template <class... Args>
-template <std::size_t I, class U>
-void CTupleBufferBase<Args...>::ConstructElementValue(std::byte * const data, const U &value)
-{
-	CheckRange<I>();
-
-	using type = std::remove_const_t<std::remove_reference_t<U>>;
-
-	if constexpr (std::is_copy_constructible_v<U>)
-		new(reinterpret_cast<type*>(data + GetElementOffset<I>())) type(value);
-}
-
-template <class... Args>
-void CTupleBufferBase<Args...>::ConstructValueAll(std::byte * const data, const Args&... elems)
-{
-	ConstructValueAll_impl(data, std::forward_as_tuple(std::forward<Args>(elems)...), std::make_index_sequence<sizeof...(Args)>{});
-}
-
 
 template <class... Args>
 void CTupleBufferBase<Args...>::ConstructValueAll(std::byte * const data, Args&&... elems)

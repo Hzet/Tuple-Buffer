@@ -13,17 +13,13 @@ namespace haz
 	public:
 		CTupleBuffer() noexcept;
 		explicit CTupleBuffer(Args&&... elems);
-		explicit CTupleBuffer(const Args&... elems);
 
 		~CTupleBuffer();
 		CTupleBuffer(CTupleBuffer&&) = default;
-		CTupleBuffer(const CTupleBuffer&) = default;
 
 		CTupleBuffer& operator=(CTupleBuffer&&) = default;
-		CTupleBuffer& operator=(const CTupleBuffer&) = default;
 
 		void push_back(Args&&... elems);
-		void push_back(const Args&... elems);
 
 		void clear();
 		void resize(std::size_t count);

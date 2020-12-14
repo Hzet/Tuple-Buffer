@@ -9,12 +9,6 @@ CTupleBuffer<Args...>::CTupleBuffer(Args&&... elems)
 }
 
 template <class... Args>
-CTupleBuffer<Args...>::CTupleBuffer(const Args&... elems)
-{
-	push_back(elems...);
-}
-
-template <class... Args>
 CTupleBuffer<Args...>::~CTupleBuffer()
 {
 	clear();
@@ -26,14 +20,6 @@ void CTupleBuffer<Args...>::push_back(Args&&... elems)
 	data_.resize((getCount() + 1u) * getStrideSize());
 
 	this->ConstructValueAll(getStoragePointer<0>(getCount() - 1u), std::forward<Args>(elems)...);
-}
-
-template <class... Args>
-void CTupleBuffer<Args...>::push_back(const Args&... elems)
-{
-	data_.resize((getCount() + 1u) * getStrideSize());
-
-	this->ConstructValueAll(getStoragePointer<0>(getCount() - 1u), elems...);
 }
 
 template <class... Args>
